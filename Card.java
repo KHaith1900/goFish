@@ -58,4 +58,11 @@ public class Card {
 		return deck;
 	}
 
+	public static Card[] shuffleCards(Card[] deck) {
+		List<Card> deckList = Arrays.asList(deck);
+		Collections.shuffle(deckList);
+		deckList.toArray(deck);
+		return deck;
+	}
+
 }
