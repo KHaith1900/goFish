@@ -1,0 +1,3 @@
+This project is a current work in progress of a command line interface game
+of goFish it has a card class which creates the card object used for the game
+and the goFish class which is the main mechanism for running the game.
