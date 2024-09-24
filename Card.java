@@ -44,4 +44,18 @@ public class Card {
 		return ranks[rank] + "of" + suits[suit];
 	}
 
+	public static Card[] createDeck() {
+		String[] suits = { "Spades", "Hearts", "Diamonds", "Clubs" };
+		String[] ranks = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+		Card[] deck = new Card[52];
+		int num = 0;
+		for (int i = 0; i < suits.length; i++) {
+			for (int j = 0; j < ranks.length; j++) {
+				deck[num] = new Card(i, j);
+				num++;
+			}
+		}
+		return deck;
+	}
+
 }
