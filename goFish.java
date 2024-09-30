@@ -81,14 +81,18 @@ public class goFish {
 					startingHandSize++;
 				}
 			}
-			for(int j = 0; j < pChoiceHandSize - 1; j++)
+			for(int i = 0; i < numCards; i++)
 			{
-				if(playerHand[pChoice][j].getRank() == rChoice)
+				for(int j = 0; j < pChoiceHandSize - 1; j++)
 				{
-					removeCard(playerHand, pChoice, rChoice);
-					pChoiceHandSize--;
+					if(playerHand[pChoice][j].getRank() == rChoice)
+					{
+						removeCard(playerHand, pChoice, rChoice);
+						pChoiceHandSize--;
+					}
 				}
 			}
+			
 	}
 
 	public static void removeCard(Card[][] playerHand, int pChoice, int rChoice)
