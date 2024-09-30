@@ -59,4 +59,144 @@ public class goFish {
 			}
 		}
 	}
+	
+	public static void drawFromDeck(int player, int[] playerHandSize)
+	{
+		int handSize = playerHandSize[player];
+		playerHand[player][handSize] = deck.pop();
+		incHandSize(player);
+	}
+
+	public static void getTheCards(Card[][] playerHand, int pChoice, int starting, int rChoice)
+	{
+		int pChoiceHandSize = getHandSize(pChoice);
+		int startingHandSize = getHandSize(starting);
+		int numCards = cardsOfRank(playerHand, playerHandSize, pChoice, rChoice);
+			for(int i = 0; i < pChoiceHandSize; i++)
+			{
+				if(playerHand[pChoice][i].getRank() == rChoice)
+				{
+					playerHand[starting][startingHandSize] = playerHand[pChoice][i];
+					incHandSize(starting);
+					startingHandSize++;
+				}
+			}
+			for(int j = 0; j < pChoiceHandSize - 1; j++)
+			{
+				if(playerHand[pChoice][i].getRank() == rChoice)
+				{
+					removeCard(playerHand, pChoice, rChoice);
+					pChoiceHandSize--;
+				}
+			}
+	}
+
+	public static void removeCard(Card[][] playerHand, int pChoice, int rChoice)
+	{
+		int handSize = getHandSize(pChoice);
+		for(int i = 1; i < handSize - 1; i++)
+		{
+			if(playerHand[pChoice][i].getRank() == rChoice)
+			{
+				if(i == handSize - 1)
+				{
+					playerHand[pChoice][i] = null;
+					decHandSize(pChoice);
+					handSize--;
+				}
+				else
+				{
+					for(int j = i; j < handSize - 1; j++)
+					{
+						playerHand[pChoice][j] = playerHand[pChoice][j + 1];
+					}
+					playerHand[pChoice][handSize - 1] = null;
+					decHandSize(pChoice);
+					handSize--;
+				}
+			}
+		}
+	}
+
+	public static void incHandSize(int player)
+	{
+		playerHandSize[player] += 1;
+	}
+
+	public static void decHandSize(int player)
+	{
+		playerHandSize[player] -= 1;
+	}
+
+	public static boolean hasSet(int starting)
+	{
+		boolean checked = false;
+		int handSize = getHandSize(starting);
+		int count = 0;
+		for(int i = 0; i < handSize - 1; i++)
+		{
+			for(int rank = 0; rank < 13; rank++)
+			{
+				if(playerHand[starting][i].getRank() == rank)
+				{
+					count++;
+					if(count == 4)
+					{
+						setRank = rank;
+						checked = true;
+					}
+				}
+			}
+			count = 0;
+		}
+		return checked;
+	}
+
+	public static void removeSet(int starting)
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			removeCard(playerHand, starting, setRank);
+		}
+		scoreboard[starting] += 1;
+	}
+
+	public static int getHandSize(int player)
+	{
+		return playerHandSize[player];
+	}
+
+	public static int cardsOfRank(Card[][] playerHand, int[] playerHandSize, int player, int rank)
+	{
+		int handSize = getHandSize(player);
+		int count = 0;
+		for(int i = 0; i < handSize; i++)
+		{
+			if(playerHand[player][i].getRank() == rank)
+			{
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public static void printHand(Card[][] playHand, int player, int[] playerHandSize)
+	{
+		int handSize = playerHandSize[player];
+		for(int i = 0; i < handSize - 1; i++)
+		{
+			System.out.println(playHand[player][i].toString());
+		}
+	}
+
+	/**
+	 *  nextTurn
+	 *  Clears the actions of the previous player and sets the next Players Turn
+	 */
+	public static void nextTurn()
+	{
+
+	}
+
+
 }
