@@ -83,7 +83,7 @@ public class goFish {
 			}
 			for(int j = 0; j < pChoiceHandSize - 1; j++)
 			{
-				if(playerHand[pChoice][i].getRank() == rChoice)
+				if(playerHand[pChoice][j].getRank() == rChoice)
 				{
 					removeCard(playerHand, pChoice, rChoice);
 					pChoiceHandSize--;
